@@ -1,0 +1,2 @@
+1:js代码不依赖Html,所以需要在本地环境安装Node.js
+2:安装好Node.js环境后,可使用安装了Run Code插件的VS Code直接运行;或使用WebStorm直接右键Run运行
