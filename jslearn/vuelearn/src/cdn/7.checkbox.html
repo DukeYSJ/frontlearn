@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.staticfile.org/vue/2.5.21/vue.min.js"></script>
+
+</head>
+
+<body>
+    <div id="app">
+
+        <!-- [ "youyong", "lanqiu", "pashan" ] -->
+        <input type="checkbox" v-model="fav" value="youyong">游泳<br>
+        <input type="checkbox" v-model="fav" value="lanqiu">篮球<br>
+        <input type="checkbox" v-model="fav" value="pashan">爬山<br>
+        {{fav}}
+
+    </div>
+    <script>
+        let vm = new Vue({
+
+            el: "#app",
+            data: {
+
+                "fav": []
+
+            }
+
+        });
+    </script>
+</body>
+
+</html>

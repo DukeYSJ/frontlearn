@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>11.cart.two.html</title>
+    <script src="https://cdn.staticfile.org/vue/2.5.21/vue.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+      integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <div id="app">
+      <div class="container h4">
+        <div class="row">
+          <table class="table table-hover table-bordered">
+            <caption class="h1 text-warning text-center">
+              购物车
+            </caption>
+            <tr>
+              <th>全选 <input type="checkbox" /></th>
+              <td>商品图片</td>
+              <td>商品名称</td>
+              <td>单价</td>
+              <td>数量</td>
+              <td>小计</td>
+              <td>操作</td>
+            </tr>
+
+            <tr v-for="(item, index) in products" :key="index">
+              <td><input type="checkbox" v-model="item.isSelected"/></td>
+              <!-- <td><img v-bind:src="item.img" alt="duke"></td> -->
+              <td><img :src="item.img" :title="item.name"></td>
+              <td>{{ item.name }}</td>
+              <td>{{ item.price }}</td>
+              <td>{{ item.count }}</td>
+              <td>{{ item.price * item.count }}</td>
+              <td>
+                <button class="btn btn-danger" @click="deleteData(index)">
+                  删除
+                </button>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let vm = new Vue({
+        el: "#app",
+        data: {
+          products: []
+        },
+
+        created() {
+          this.loadData();
+        },
+
+        methods: {
+          loadData: function() {
+            axios.get("products.json").then(
+              res => {
+                this.products = res.data;
+                console.log(res.data);
+              },
+              err => {
+                console.log(err);
+              }
+            );
+          },
+          deleteData: function(i) {
+            this.products = this.products.filter((item, index) => i != index);
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

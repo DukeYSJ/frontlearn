@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.staticfile.org/vue/2.5.21/vue.min.js"></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="eachText" v-on:keyUp.enter="handleUp" />
+        <ul>
+            <li v-for="(item, index) in arr" :key="index">
+                {{item}}
+                <input type="button" value="delete" @click="deleteData(index)">
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        let vm = new Vue({
+            "el": "#app",
+            data: {
+                "eachText": '',
+                arr: []
+            },
+            "methods": {
+                handleUp(event) {
+                    this.arr.push(this.eachText);
+                    this.eachText = "";
+                },
+                deleteData(i) {
+                    //alert(i);
+                    this.arr = this.arr.filter((item, index) => i != index);
+                }
+            }
+
+
+
+        });
+    </script>
+</body>
+
+</html>

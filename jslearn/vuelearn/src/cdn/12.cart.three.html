@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>12.cart.three.html</title>
+  <script src="https://cdn.staticfile.org/vue/2.5.21/vue.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+    crossorigin="anonymous" />
+</head>
+
+<body>
+  <div id="app">
+    <div class="container h4">
+      <div class="row">
+        <table class="table table-hover table-bordered">
+          <caption class="h1 text-warning text-center">
+            购物车
+          </caption>
+          <tr>
+            <th>全选 <input type="checkbox" v-model="changeAll" @change="selectAllOrNot" /></th>
+            <td>商品图片</td>
+            <td>商品名称</td>
+            <td>单价</td>
+            <td>数量</td>
+            <td>小计</td>
+            <td>操作</td>
+          </tr>
+
+          <tr v-for="(item, index) in products" :key="index">
+            <td><input type="checkbox" v-model="item.isSelected" @change="checkOne" /></td>
+            <!-- <td><img v-bind:src="item.img" alt="duke"></td> -->
+            <td><img :src="item.img" :title="item.name"></td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.price }}</td>
+            <td>
+              <input type="number" v-model.number="item.count" min="0">
+            </td>
+            <!-- <td>{{ (item.price * item.count).toFixed(3) }}</td> -->
+            <td>{{item.price * item.count | fixedPrice(2)}}</td>
+            <td>
+              <button class="btn btn-danger" @click="deleteData(index)">
+                删除
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="6">总价:{{sum()|toFixed(2)}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let vm = new Vue({
+      el: "#app",
+      data: {
+        products: [],
+        changeAll: true
+      },
+
+      created() {
+        this.loadData();
+      },
+
+      methods: {
+        loadData: function () {
+          axios.get("products.json").then(
+            res => {
+              this.products = res.data;
+              this.checkOne();
+              console.log(res.data);
+            },
+            err => {
+              console.log(err);
+            }
+          );
+        },
+        deleteData: function (i) {
+          this.products = this.products.filter((item, index) => i != index);
+        },
+        selectAllOrNot: function () {
+          this.products.forEach(element => {
+            element["isSelected"] = this.changeAll;
+          });
+        },
+        checkOne: function () {
+          this.changeAll = this.products.every(item => item.isSelected)
+        },
+        sum: function () {
+          //use the reduce to get the sum price
+          return this.products.reduce((previous, current) => {
+            return previous + current.price * current.count;
+          }, 0);
+        }
+      },
+      filters: {
+        fixedPrice(input, paramOne) {
+          return "Y" + input.toFixed(paramOne);
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

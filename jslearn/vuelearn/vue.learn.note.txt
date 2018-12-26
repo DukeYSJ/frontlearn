@@ -1,0 +1,6 @@
+CDN目录下:
+1:vue.axios.bootstrap等引入方式为CDN方式,没有使用NPM安装包的方式,所以代码可以直接在浏览中使用
+2:代码中ajax请求使用到了axios库,如果代码直接以file协议在浏览器中打开ajax请求会报错.建议使用安装了Live Server插件的VS Code或是WebStorm打开Html形式的源码
+
+NPM目录下:
+使用安装vue npm包的形式导入vue

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>自定义标签以及自定义标签带上CSS后可以作为组件复用</title>
+
+    <style>
+        #span {
+            color: red;
+        }
+
+        dukeDiv {
+            display: block;
+            width: 300px;
+            height: 200px;
+            background-color: coral;
+            text-align: center;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <span id="span">原始Span</span>
+    <dukeSpan>这是自定义Span</dukeSpan>
+    <dukeSpan>这是自定义Span</dukeSpan>
+    <dukeDiv>
+        这是自定义Div
+    </dukeDiv>
+    <span id="span">原始Span</span>
+    <dukeDiv>
+        这是自定义Div
+    </dukeDiv>
+</body>
+
+</html>

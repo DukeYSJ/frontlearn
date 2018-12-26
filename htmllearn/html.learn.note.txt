@@ -1,0 +1,2 @@
+1.学习Html4以及Html5的基本用法
+2.建议使用安装有Live Server 的VS Code 或是 WebStorm 打开文件

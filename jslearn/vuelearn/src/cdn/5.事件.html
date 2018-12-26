@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.staticfile.org/vue/2.5.21/vue.min.js"></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <!-- 函数名后面,如果不需要传递参数,不要写()(vue自动传入event等参数);如果要传参数,肯定要写括号,并且注意:一般默认第一个参数是$event -->
+        <div style="background: red;width: 100px;height: 20px;" v-on:click="clickOne">click one</div>
+        <div style="background: gray;width: 100px;height: 20px;" v-on:mouseOver="clickTwo">click two</div>
+        <!-- v-on <==> @ -->
+        <div style="background: yellow;width: 100px;height: 20px;" @click="clickThree">click three</div>
+    </div>
+    <script>
+        var vm = new Vue({
+            "el": "#app",
+            "data": {
+                "user": {
+                    "name": "duke",
+                    "age": 31,
+                    "address": "YYYY"
+                }
+            },
+            "methods": {
+                //注意:不能使用箭头函数,因为箭头函数没有自己的this,会以上下文的this为自己的this,就会把this指向window
+                //普通写法时,this始终指向该函数所在的vm实例(一般vm实例只有一个)
+                clickOne() {
+                    alert(this.user.name);
+                },
+                "clickTwo": function () {
+                    alert(this.user.age);
+                },
+                clickThree: function () {
+                    alert(this.user.address);
+                }
+
+            }
+
+        });
+    </script>
+</body>
+
+</html>
