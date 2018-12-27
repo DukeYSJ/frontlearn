@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Html5 Local Storage 基本使用</title>
+
+</head>
+
+<body>
+
+    <div id="result"></div>
+    <script type="text/javascript">
+        if (typeof (Storage) !== "undefined") {
+            // 针对 localStorage/sessionStorage 的代码
+            console.log("ok");
+            localStorage.setItem("lastname", "france");
+            // Retrieve
+            document.getElementById("result").innerHTML = localStorage.getItem("lastname");
+        } else {
+            // 抱歉！不支持 Web Storage ..
+            console.log("not support web storage");
+        }
+    </script>
+
+
+</body>
+
+</html>
